@@ -4,6 +4,10 @@ One-paragraph ADRs for decisions with tradeoffs, newest first. Cheap now, gold i
 
 ---
 
+## 2026-07-07 — Tokens transcribed light-only, pinned to a source commit
+
+Civic Ink v1.4 tokens were hand-transcribed into `src/styles/tokens.css` from design-system.md @ commit 5bb4808, with the source commit recorded in the file header so drift is detectable. Two judgment calls: the dark-mode palette was left out (out of launch scope; logged in later.md rather than carried as dead weight), and the undeclared radius tokens were gap-filled from the doc's prose (logged in civic-ink-changes.md). Tradeoff of light-only: adding dark mode later means touching tokens.css again instead of it being free — accepted, because untested dark mode against a launch-week deadline is worse than absent dark mode.
+
 ## 2026-07-07 — First deploy went through the Vercel CLI, not git
 
 The git-triggered deploy failed (exit 127) because the GitHub repo only contained the markdown docs — the Astro scaffold was never pushed, so Vercel had no `package.json` and no `astro` binary. The scaffold is now committed locally, but this machine has no GitHub credentials (previous commits were made in the GitHub web UI), so the push is blocked on Melinda authenticating. Rather than leave the day-one live URL unshipped, the skeleton was deployed directly with `vercel deploy --prod` from the local working tree. Tradeoff: the live site and the repo are temporarily out of sync, and the git → Vercel pipeline stays red until the local commits are pushed. Once they are, every merge to main deploys as designed and the CLI path retires.
