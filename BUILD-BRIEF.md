@@ -1,96 +1,113 @@
-# Build Brief — Field Notes
+# Build Brief v2 — Field Notes (greenmelinda.com)
 
 **Deadline: live by Friday, July 10, 2026.** Shipped and shared beats polished and private.
 
+> **v2 changes (Tue night):** Toys are now the main event; process entries drop from 3 to 2 (Le French Club exits process/, its forms become a toy). Schedule compressed one day. Site is positioned as the eventual successor to the Squarespace portfolio. v1 is superseded; this file is canonical.
+
 ## One-liner
 
-A designer's field notes on working with AI — showing the judgment, not just the output.
+Working things I've built with AI — and the judgment that shaped them.
 
 ## Primary job
 
-Document my process. The site exists so that a hiring manager, a fellow designer, or a future collaborator can see *how* I work with AI: where I let it run, where I overrule it, and why. It is portfolio-adjacent but not a portfolio — my case studies live elsewhere.
+Demonstrate the practice with live artifacts. The toys are the proof; the process entries and colophons supply the judgment story. A visitor should be able to *touch something working* within one click of arriving.
+
+## Site strategy (two-site model)
+
+- **Squarespace portfolio** — the résumé's front door: case studies, career proof. Unchanged this week.
+- **Field Notes (this site)** — the practice: live demos, process, the red pen. Linked from LinkedIn and the Friday launch post.
+- Each site links to the other, once, clearly.
+- **Succession plan:** Field Notes is expected to become the main portfolio eventually. This week's only obligation to that future: clean URL structure (no toy-specific junk at root level), and no architectural decisions that would fight a future `/work/` section. Migration itself is explicitly not a this-month project.
 
 ## Audience, in order
 
-1. Hiring managers and design leaders evaluating me for Senior II / Staff / Lead roles who've read "AI-fluent" on a hundred résumés and believed none of them
+1. Hiring managers and design leaders evaluating me for Senior II / Staff / Lead roles — who've read "AI-fluent" on a hundred résumés and can verify it here in one click
 2. Designers figuring out their own AI practice
-3. Me, six months from now, wanting a record of how this actually felt
+3. Me, six months from now
 
-## Point of view (the site's thesis)
+## Point of view (unchanged, relocated)
 
-AI output is raw material. Judgment is the craft. Every entry demonstrates this by showing the red pen: what was generated, what survived contact with a designer, and the reasoning in between. The intro states this once, plainly; the entries prove it; nothing on the site repeats it as a slogan.
+AI output is raw material; judgment is the craft. In v2 this thesis lives primarily in the **toy colophons** — every toy states what it is, what I rejected while building it, and one honest limitation — and secondarily in two process essays. The red pen is now a per-artifact habit, not just an essay device.
 
 ## Information architecture
 
 ```
-Home ─ thesis + 3 process entries + toy shelf preview + about teaser
-├── /process/          3 entries at launch, fixed
-│     ├── building-civic-ink          (design system built with Claude Code)
-│     ├── le-french-club              (real client, real forms, real constraints)
-│     └── teaching-claude-my-taste    (the CLAUDE.md / working-with-me setup)
-├── /toys/             shelf of cards, each with a colophon
+Home ─ thesis line + TOY SHELF (the lead) + 2 process entries + about teaser
+├── /toys/             the main event. cards → live demos
+│     └── [each toy]   card: name, one-liner, screenshot, live link,
+│                      colophon (stack · build time · rejected · limitation)
+├── /process/          2 essays at launch, fixed
+│     ├── building-civic-ink
+│     └── teaching-claude-my-taste
 ├── /about/            operating-manual style, one page
-└── colophon           in footer: stack, Civic Ink v1.4, built with Claude Code
+└── colophon           footer: stack, Civic Ink version, built with Claude Code
 ```
 
-Five templates total: home, process index/entry, toys shelf, about. No more.
+Toy demos that are self-contained (e.g., the Le French Club forms) are hosted
+within this site under /toys/[name]/demo/ as static assets; anything already
+deployed elsewhere just links out. No new deploy infrastructure per toy.
 
 ## Content plan
 
-### Process entries (the spine, every entry, no exceptions)
+### Toys (the lead)
 
-1. **The problem** — real context, stakes, constraints
-2. **Where AI fit** — and explicitly where it didn't
-3. **What I did / what Claude did** — honest division of labor
-4. **Kept / rejected / why** — the centerpiece. Concrete examples: show a rejected output and the reasoning. This section is what makes the site different from every "how I use AI" post on the internet.
+Launch inventory: **[MELINDA FILLS THIS IN — everything real, especially the janky]**
+Known candidates: Le French Club forms (membership + event), film discovery app, **[…]**
 
-Target length: 800–1,200 words. Journalism rules: written to deadline, edited once, shipped.
+Each toy card carries, without exception:
+- One-sentence what-it-is
+- Live demo link or embedded demo
+- Colophon: stack · build time in honest units · **one thing I rejected during the build** · **one honest limitation**
 
-### Toys
+Rule: toys launch as they exist today. No toy gets "finished up" before Friday.
+The colophon confesses the state; that confession is the brand.
 
-Each card: name, one-sentence what-it-is, screenshot or live link, colophon (stack, build time, one honest limitation). Toys earn their place by existing, not by being impressive. Launch with whatever is real today.
+### Process entries (two, fixed)
+
+Same mandatory spine: problem → where AI fit (and didn't) → what I did / what
+Claude did → **kept / rejected / why**. 800–1,200 words. Edited once, shipped.
+The Field Notes build itself feeds both essays via docs/rejections.md.
 
 ### About
 
-Who I am, how I work, what I'm looking for — operating-manual register. Links out to portfolio, working-with-me repo, LinkedIn. One page, no timeline graphics, no headshot carousel.
+One page, operating-manual register. Links: Squarespace portfolio,
+working-with-me repo, LinkedIn. Notes the two-site arrangement in one line.
 
 ## Design direction
 
-Civic Ink v1.4, applied as designed — this site is a reference implementation of the system, which is itself part of the argument.
-
-**Signature element:** the *red pen*. In the kept/rejected sections, rejected AI output is displayed with a visible editorial treatment — struck through, margin-annotated, or marked in a way that reads as an editor's hand on a proof. One signature, executed precisely; everything else stays quiet and lets type and spacing carry the page. (Treatment to be designed Thursday against real content — don't build this speculatively.)
-
-Motion: at most one considered moment, if any. Reduced-motion respected. Restraint is the brand.
+Civic Ink applied as designed — this site remains a reference implementation.
+Version: **v1.5** (tokens.css transcription + reconstructed v1.4 changelog,
+per Wed morning session). Signature element: the red pen, now appearing on
+every toy colophon as well as in essays. One signature, executed precisely.
 
 ## Out of scope for launch
 
-- Blog machinery, RSS, tags, search, comments
-- Case studies (they live in the portfolio)
-- Dark mode
-- Any entry requiring new project work to exist
+- Finishing or polishing any toy
+- Case studies / portfolio migration
+- Blog machinery, RSS, tags, search, comments, dark mode
 - Custom illustrations
 - Perfect
 
-## Schedule (it's Monday)
+## Schedule (revised — it's Tuesday night)
 
 | Day | Ship |
 |-----|------|
-| **Mon** | Repo + CLAUDE.md in place. Astro scaffold with Civic Ink tokens wired. Skeleton deployed to Vercel — live URL exists tonight. |
-| **Tue** | Draft entries 1 and 2. Ugly drafts allowed; missing drafts are not. |
-| **Wed** | Draft entry 3 + toy colophons + about page. |
-| **Thu** | Content into templates. Civic Ink polish pass. Design and apply the red-pen treatment. Write the home intro last. |
-| **Fri** | Accessibility + mobile pass, Lighthouse ≥ 95, colophon, ship. Post to JSC and LinkedIn same day. |
+| **Wed AM** | Tokens transcribed → Civic Ink v1.5. Version gap documented. Basic type/spacing applied so the site stops hurting. |
+| **Wed PM** | Toy inventory locked. All toy cards + colophons drafted. LFC forms staged under /toys/. |
+| **Thu** | Draft both process essays. About page. Content into templates. |
+| **Fri** | Red-pen treatment, Civic Ink polish, a11y + mobile pass, Lighthouse ≥ 95, domain live at greenmelinda.com, ship, post to JSC + LinkedIn. |
 
 ## Definition of done
 
-- Live at the production URL
-- 3 process entries, each with a real kept/rejected section
-- Every page passes the quality floor in CLAUDE.md
+- Live at greenmelinda.com
+- Every toy has a working demo link and a complete colophon
+- 2 process entries with real kept/rejected sections
+- Quality floor (CLAUDE.md) passes on every page
 - Announced publicly before end of Friday
 
 ## Risks and their pre-decided answers
 
-- *"This entry needs one more pass"* → No. Edit once, ship. Post-launch edits are free.
-- *"Should I add a fourth entry about—"* → `docs/later.md`.
-- *"The red-pen treatment isn't perfect"* → Ship the simple version (strikethrough + margin note). Iterate after Friday.
-- *"Maybe this should just be part of my portfolio"* → Decided Monday: standalone. Not reopening.
+- *"Let me just fix this one thing in the toy first"* → No. Colophon confesses it. Ship.
+- *"Should the shelf have a third… fourth… entry?"* → Ship what exists. Shelves grow.
+- *"Maybe I should start the portfolio migration while I'm in here"* → docs/later.md. Not this month.
+- *"Is two sites confusing?"* → No. Case studies prove the career; Field Notes proves the practice. One line on the about page says so.
