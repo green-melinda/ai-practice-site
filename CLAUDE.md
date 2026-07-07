@@ -1,4 +1,4 @@
-# CLAUDE.md — AI Practice Microsite
+# CLAUDE.md — Field Notes
 
 ## What this is
 
