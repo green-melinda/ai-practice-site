@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  toy: CollectionEntry<'toys'>;
+}
+
+const { toy } = Astro.props;
+const { title, description, stack, buildTime, limitation, url, unfinished } =
+  toy.data;
+---
+
+<article>
+  <h3>{url ? <a href={url}>{title}</a> : title}</h3>
+  <p>{description}</p>
+  {unfinished && <p>Unfinished, and says so.</p>}
+  <dl>
+    <dt>Stack</dt>
+    <dd>{stack.join(', ')}</dd>
+    <dt>Build time</dt>
+    <dd>{buildTime}</dd>
+    <dt>One honest limitation</dt>
+    <dd>{limitation}</dd>
+  </dl>
+</article>

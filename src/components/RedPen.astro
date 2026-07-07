@@ -1,0 +1,20 @@
+---
+// Red pen: the site's signature element. Marks rejected AI output with an
+// editor's-hand treatment in the kept/rejected sections.
+//
+// Stub only. Per the build brief, the visual treatment gets designed Thursday
+// against real content — do not build it speculatively. Until then this
+// renders the rejected passage in a plain <del> with its margin note.
+
+interface Props {
+  // The editor's margin note: why this was rejected.
+  note: string;
+}
+
+const { note } = Astro.props;
+---
+
+<figure>
+  <del><slot /></del>
+  <figcaption>{note}</figcaption>
+</figure>

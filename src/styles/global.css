@@ -1,0 +1,10 @@
+/*
+ * Global styles — intentionally empty for now.
+ *
+ * Civic Ink v1.4 tokens exist only as documentation in
+ * github.com/green-melinda/working-with-me (design-system/design-system.md);
+ * there is no machine-readable tokens file to snapshot. Per the build brief,
+ * tokens get transcribed together with Melinda before any styles are written.
+ * When that happens: create src/styles/tokens.css with a source-attribution
+ * header and import it at the top of this file.
+ */
