@@ -2,7 +2,7 @@
 
 ## What this is
 
-A standalone microsite documenting how Melinda Green, a senior product designer, applies AI in her design practice. It is an **archive with an opinion**, not a blog. Launch scope is fixed: three process entries, a toy apps shelf, and an about page. Nothing on the site promises future content.
+Because Squarespace isn't cutting it anymore — A standalone microsite documenting how Melinda Green, a staff product designer, applies AI in her design practice. It is an **archive with an opinion**, not a blog. Launch scope is fixed: three process entries, a toy apps shelf, and an about page. Nothing on the site promises future content.
 
 The site itself is evidence: it is built with Claude Code, using Civic Ink, and that fact should be visible in the colophon — but the site should never feel like a demo of AI. It should feel like a designer's field notes.
 
@@ -67,5 +67,13 @@ Three collections:
 - Toy shelf with the toys that exist today
 - About page
 - Colophon (footer or page): stack, Civic Ink version, "built with Claude Code," link to working-with-me repo
+
+## Design system changes during this build
+
+- Gap-fills (new tokens/components demanded by real content): allowed.
+  Timebox 30 min, log in docs/civic-ink-changes.md with the forcing page.
+- Redefinitions of existing tokens, type, radius, or palette: not this week.
+  One-sentence note in docs/later.md, then back to the build.
+- When Melinda proposes a change, ask which category it is before implementing.
 
 Anything not on this list is post-launch. If it feels urgent, it goes in `docs/later.md`, not in the build.
