@@ -4,6 +4,10 @@ One-paragraph ADRs for decisions with tradeoffs, newest first. Cheap now, gold i
 
 ---
 
+## 2026-07-07 — First deploy went through the Vercel CLI, not git
+
+The git-triggered deploy failed (exit 127) because the GitHub repo only contained the markdown docs — the Astro scaffold was never pushed, so Vercel had no `package.json` and no `astro` binary. The scaffold is now committed locally, but this machine has no GitHub credentials (previous commits were made in the GitHub web UI), so the push is blocked on Melinda authenticating. Rather than leave the day-one live URL unshipped, the skeleton was deployed directly with `vercel deploy --prod` from the local working tree. Tradeoff: the live site and the repo are temporarily out of sync, and the git → Vercel pipeline stays red until the local commits are pushed. Once they are, every merge to main deploys as designed and the CLI path retires.
+
 ## 2026-07-07 — Civic Ink tokens will be transcribed, not snapshotted
 
 The working-with-me repo (checked on GitHub and locally) has no machine-readable tokens file — Civic Ink v1.4 exists only as documentation with embedded CSS blocks in `design-system/design-system.md`. A verbatim snapshot is therefore impossible, and transcription by hand risks drift from the source. Decision: per the build brief, transcription happens together with Melinda before any styles are written, and `docs/civic-ink-changes.md` will record anything the transcription surfaces (gaps, ambiguities, needed tokens that don't exist). Until then, `src/styles/global.css` is an empty placeholder and the skeleton ships unstyled.
