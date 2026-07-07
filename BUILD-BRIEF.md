@@ -1,4 +1,4 @@
-# Build Brief — AI Practice Microsite
+# Build Brief — Field Notes
 
 **Deadline: live by Friday, July 10, 2026.** Shipped and shared beats polished and private.
 
