@@ -11,14 +11,17 @@ const toys = await getCollection('toys');
 
 <BaseLayout
   title="Field Notes — Melinda Green"
-  description="A designer's field notes on working with AI — showing the judgment, not just the output."
+  description="Working things I've built with AI — and the judgment that shaped them."
 >
   <h1>Field Notes</h1>
-  <p>
-    A designer's field notes on working with AI — showing the judgment, not
-    just the output.
-  </p>
+  <p>Working things I've built with AI — and the judgment that shaped them.</p>
   <!-- Home intro (the thesis, stated once, plainly) gets written Thursday, last. -->
+
+  <section aria-labelledby="toys-heading">
+    <h2 id="toys-heading">Toys</h2>
+    {toys.map((toy) => <ToyCard toy={toy} />)}
+    <p><a href="/toys/">The full shelf</a></p>
+  </section>
 
   <section aria-labelledby="process-heading">
     <h2 id="process-heading">Process</h2>
@@ -32,12 +35,6 @@ const toys = await getCollection('toys');
       }
     </ul>
     <p><a href="/process/">All process entries</a></p>
-  </section>
-
-  <section aria-labelledby="toys-heading">
-    <h2 id="toys-heading">Toys</h2>
-    {toys.map((toy) => <ToyCard toy={toy} />)}
-    <p><a href="/toys/">The full shelf</a></p>
   </section>
 
   <section aria-labelledby="about-heading">
