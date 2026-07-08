@@ -2,14 +2,14 @@
 
 ## What this is
 
-Because Squarespace isn't cutting it anymore — A standalone microsite documenting how Melinda Green, a staff product designer, applies AI in her design practice. It is an **archive with an opinion**, not a blog. Launch scope is fixed: three process entries, a toy apps shelf, and an about page. Nothing on the site promises future content.
+Because Squarespace isn't cutting it anymore — A standalone microsite documenting how Melinda Green, a staff product designer, applies AI in her design practice. It is an **archive with an opinion**, not a blog. Launch scope is fixed: a toy apps shelf (the lead), two process entries, and an about page. Nothing on the site promises future content.
 
 The site itself is evidence: it is built with Claude Code, using Civic Ink, and that fact should be visible in the colophon — but the site should never feel like a demo of AI. It should feel like a designer's field notes.
 
 ## Stack
 
 - **Framework:** Astro (static output, content collections for entries)
-- **Styling:** Civic Ink v1.4 tokens as the CSS custom-property layer. Do not invent token values. Pull them from `github.com/green-melinda/working-with-me` — if a needed token doesn't exist there, stop and ask before creating one.
+- **Styling:** Civic Ink v1.5 tokens as the CSS custom-property layer. Do not invent token values. Snapshot them from `design-system/tokens.css` in `github.com/green-melinda/working-with-me` — if a needed token doesn't exist there, stop and ask before creating one.
 - **JS:** Vanilla, minimal, progressive enhancement only. The site must be fully readable with JS disabled.
 - **Deploy:** Vercel. A deployed skeleton goes live on day one; every merge to main deploys.
 - **No:** CMS, component framework, CSS framework, analytics beyond the lightest privacy-respecting option (or none), cookie banners (don't collect anything that needs one), newsletter capture.
@@ -32,7 +32,7 @@ Three collections:
    - Where AI actually fit (and where it didn't)
    - What I did / what Claude did
    - **What I kept, what I rejected, and why** ← this section is mandatory and is the point of the entire site
-2. **`toys/`** — small apps built with AI. Each toy gets a card + a short **colophon**, not an essay: what it is, why it exists, stack, build time, one honest limitation. Toys are allowed to be unfinished; the colophon says so plainly.
+2. **`toys/`** — small apps built with AI. Each toy gets a card + a short **colophon**, not an essay: what it is, why it exists, stack, build time, one thing rejected during the build, one honest limitation. Toys are allowed to be unfinished; the colophon says so plainly.
 3. **`about/`** — one page. Operating-manual register, consistent with the public `working-with-me` repo. Not a résumé; the résumé lives elsewhere and gets one link.
 
 **Bucket boundary rule:** if a piece of work could be both a process entry and a toy, the *essay about the judgment* goes in `process/` and the *artifact* goes in `toys/`, cross-linked. Never duplicate content between them.
@@ -63,8 +63,8 @@ Three collections:
 
 ## Launch scope (closed)
 
-- 3 process entries, drawn from existing work only
-- Toy shelf with the toys that exist today
+- Toy shelf with the toys that exist today, leading the home page
+- 2 process entries, drawn from existing work only
 - About page
 - Colophon (footer or page): stack, Civic Ink version, "built with Claude Code," link to working-with-me repo
 
