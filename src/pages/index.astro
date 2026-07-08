@@ -13,7 +13,7 @@ const toys = await getCollection('toys');
   title="Field Notes — Melinda Green"
   description="Working things I've built with AI — and the judgment that shaped them."
 >
-  <h1>Field Notes</h1>
+  <h1 class="hero">Field Notes</h1>
   <p>Working things I've built with AI — and the judgment that shaped them.</p>
   <!-- Home intro (the thesis, stated once, plainly) gets written Thursday, last. -->
 
@@ -45,3 +45,10 @@ const toys = await getCollection('toys');
     </p>
   </section>
 </BaseLayout>
+
+<style>
+  /* The one earned display-xl moment: the site's name on its own page. */
+  .hero {
+    font-size: var(--text-display-xl);
+  }
+</style>
