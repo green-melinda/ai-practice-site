@@ -1,19 +1,13 @@
 /*
- * Civic Ink v1.4 — design tokens
+ * Civic Ink v1.5 — design tokens
  *
- * Transcribed 2026-07-07 from github.com/green-melinda/working-with-me,
- * design-system/design-system.md @ commit 5bb4808 ("uploaded v1.4").
- * The source is documentation, not a machine-readable token file, so this
- * is a hand transcription — values match the source's CSS blocks exactly.
- * Change the source first, then re-transcribe. Do not edit values here.
+ * Snapshot of github.com/green-melinda/working-with-me,
+ * design-system/tokens.css @ commit dfc3239 (the canonical machine-readable
+ * token file, introduced in v1.5). Change the source first, then
+ * re-snapshot. Do not edit values here.
  *
- * Deliberate deviations from the source doc:
- * - Dark mode ("Civic Ink — Night") omitted: out of launch scope, see
- *   docs/later.md.
- * - --radius-sm and --radius-pill are declared here as a gap-fill: the doc
- *   references them throughout but never declares them. Values come from
- *   its border rules ("Default border-radius is 4px", "Pills only use
- *   border-radius: 100px"). Logged in docs/civic-ink-changes.md.
+ * One deliberate deviation: the source's dark-mode block ("Civic Ink —
+ * Night") is omitted — out of launch scope, see docs/later.md.
  */
 
 :root {
@@ -88,7 +82,7 @@
   --border-accent-acid:   4px solid var(--color-acid);
   --border-accent-cobalt: 4px solid var(--color-cobalt);
 
-  /* Border radius — gap-fill, see header comment */
+  /* Border radius — two settings only: subtle or pill */
   --radius-sm:   4px;
   --radius-pill: 100px;
 
