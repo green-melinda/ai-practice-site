@@ -47,8 +47,15 @@ const toys = await getCollection('toys');
 </BaseLayout>
 
 <style>
-  /* The one earned display-xl moment: the site's name on its own page. */
+  /* The one earned display-xl moment: the site's name on its own page.
+     Steps down one token below --bp-sm so it holds one line. */
   .hero {
     font-size: var(--text-display-xl);
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      font-size: var(--text-display-lg);
+    }
   }
 </style>
