@@ -6,8 +6,16 @@ interface Props {
 }
 
 const { toy } = Astro.props;
-const { title, description, stack, buildTime, limitation, url, unfinished } =
-  toy.data;
+const {
+  title,
+  description,
+  stack,
+  buildTime,
+  rejected,
+  limitation,
+  url,
+  unfinished,
+} = toy.data;
 ---
 
 <article>
@@ -19,6 +27,8 @@ const { title, description, stack, buildTime, limitation, url, unfinished } =
     <dd>{stack.join(', ')}</dd>
     <dt>Build time</dt>
     <dd>{buildTime}</dd>
+    <dt>One thing I rejected</dt>
+    <dd>{rejected}</dd>
     <dt>One honest limitation</dt>
     <dd>{limitation}</dd>
   </dl>

@@ -24,6 +24,8 @@ const toys = defineCollection({
     description: z.string(),
     stack: z.array(z.string()),
     buildTime: z.string(),
+    // One thing rejected during the build — the red pen, per artifact.
+    rejected: z.string(),
     // One honest limitation, stated plainly.
     limitation: z.string(),
     url: z.string().url().optional(),
