@@ -3,6 +3,8 @@
 **Deadline: live by Friday, July 10, 2026.** Shipped and shared beats polished and private.
 
 > **v2 changes (Tue night):** Toys are now the main event; process entries drop from 3 to 2 (Le French Club exits process/, its forms become a toy). Schedule compressed one day. Site is positioned as the eventual successor to the Squarespace portfolio. v1 is superseded; this file is canonical.
+>
+> **v2.1 changes (Wed PM):** LFC forms are off the shelf entirely — out of the toy inventory, files out of the build (see docs/decisions.md, 2026-07-08). The shelf leads with find-a-film, live and linkable. Inventory below is now real, not placeholder.
 
 ## One-liner
 
@@ -43,16 +45,20 @@ Home ─ thesis line + TOY SHELF (the lead) + 2 process entries + about teaser
 └── colophon           footer: stack, Civic Ink version, built with Claude Code
 ```
 
-Toy demos that are self-contained (e.g., the Le French Club forms) are hosted
-within this site under /toys/[name]/demo/ as static assets; anything already
-deployed elsewhere just links out. No new deploy infrastructure per toy.
+Toy demos that are self-contained are hosted within this site under
+/toys/[name]/demo/ as static assets; anything already deployed elsewhere just
+links out. No new deploy infrastructure per toy. (At launch, no toy exercises
+the embedded pattern — find-a-film links out.)
 
 ## Content plan
 
 ### Toys (the lead)
 
-Launch inventory: **[MELINDA FILLS THIS IN — everything real, especially the janky]**
-Known candidates: Le French Club forms (membership + event), film discovery app, **[…]**
+Launch inventory (locked Wed PM, v2.1):
+
+1. **find-a-film** — mood-based film finder. Live: https://find-a-film-tau.vercel.app/ (colophon facts owed: build time, one rejected, one limitation)
+
+Removed from candidacy: Le French Club forms (off the shelf entirely, per decisions.md 2026-07-08).
 
 Each toy card carries, without exception:
 - One-sentence what-it-is

@@ -4,7 +4,9 @@ One-paragraph ADRs for decisions with tradeoffs, newest first. Cheap now, gold i
 
 ---
 
-## 2026-07-07 — Tokens transcribed light-only, pinned to a source commit
+## 2026-07-08 — LFC forms are off the toy shelf entirely
+
+Brief v2's headline move — Le French Club forms becoming a toy, staged under `/toys/` — is reversed. Melinda's call, Wednesday PM: the forms are out of the launch inventory, full stop, and their files stay out of this build. The shelf leads with find-a-film (live at find-a-film-tau.vercel.app), which fills the demo slot v2 wanted from LFC. Tradeoff: the shelf launches thinner than v2 imagined, and the "self-contained demos hosted under /toys/[name]/demo/" pattern ships with no toy exercising it — first external-link-only shelf instead. Accepted per the risk table: ship what exists, shelves grow. Recorded as brief v2.1.
 
 Civic Ink v1.4 tokens were hand-transcribed into `src/styles/tokens.css` from design-system.md @ commit 5bb4808, with the source commit recorded in the file header so drift is detectable. Two judgment calls: the dark-mode palette was left out (out of launch scope; logged in later.md rather than carried as dead weight), and the undeclared radius tokens were gap-filled from the doc's prose (logged in civic-ink-changes.md). Tradeoff of light-only: adding dark mode later means touching tokens.css again instead of it being free — accepted, because untested dark mode against a launch-week deadline is worse than absent dark mode.
 
