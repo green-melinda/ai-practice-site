@@ -1,61 +1,390 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ToyCard from '../components/ToyCard.astro';
 
 const entries = (await getCollection('process')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
-const toys = await getCollection('toys');
+const featured = entries.find((e) => e.id === 'mood-first-streamer-second');
+
+// The ghost row is decoration for a one-entry list; it must never render
+// alongside a second real entry.
+const showGhost = entries.length === 1;
+
+// timeZone UTC because frontmatter dates parse as UTC midnight — local
+// rendering shifts them back a day (and near month edges, a month).
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 ---
 
 <BaseLayout
   title="Field Notes — Melinda Green"
   description="Working things I've built with AI — and the judgment that shaped them."
 >
-  <h1 class="hero">Field Notes</h1>
-  <p>Working things I've built with AI — and the judgment that shaped them.</p>
-  <!-- Home intro (the thesis, stated once, plainly) gets written Thursday, last. -->
+  <header class="masthead" slot="header">
+    <span class="wordmark">Field Notes</span>
+    <nav aria-label="Site">
+      <a href="/about/">about</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://www.mynameisgreenmelinda.com">mynameisgreenmelinda.com</a>
+    </nav>
+  </header>
 
-  <section aria-labelledby="toys-heading">
-    <h2 id="toys-heading">Toys</h2>
-    {toys.map((toy) => <ToyCard toy={toy} />)}
-    <p><a href="/toys/">The full shelf</a></p>
+  <div class="epigraph">
+    <h1>Judgment as craft.</h1>
+    <p>Notes from an AI-assisted design practice.</p>
+  </div>
+
+  <section aria-labelledby="toy-title">
+    <article class="toy-card">
+      <span class="sticker">Toy № 001</span>
+      <h2 id="toy-title">I don't know what to watch</h2>
+      <p class="toy-dek">Tell it how you feel. It tells you what to watch.</p>
+      <div class="toy-actions">
+        <a class="btn-try" href="https://find-a-film-tau.vercel.app/">Try it</a>
+        {
+          featured && (
+            <a class="notes-link" href={`/process/${featured.id}/`}>
+              read the build notes
+            </a>
+          )
+        }
+      </div>
+    </article>
   </section>
 
-  <section aria-labelledby="process-heading">
-    <h2 id="process-heading">Process</h2>
-    <ul>
+  <section aria-labelledby="notes-heading">
+    <h2 class="eyebrow" id="notes-heading">Notes</h2>
+    <ul class="note-list">
       {
         entries.map((entry) => (
-          <li>
-            <a href={`/process/${entry.id}/`}>{entry.data.title}</a>
+          <li class="note-row">
+            <a href={`/process/${entry.id}/`}>
+              <span class="note-text">
+                <h3 class="note-title">{entry.data.title}</h3>
+                <span class="note-dek">{entry.data.description}</span>
+              </span>
+              <time
+                class="note-date"
+                datetime={entry.data.date.toISOString().slice(0, 10)}
+              >
+                {formatDate(entry.data.date)}
+              </time>
+            </a>
           </li>
         ))
       }
+      {
+        showGhost && (
+          <li class="note-row ghost" aria-hidden="true">
+            <span class="note-text">
+              <span class="note-title">Next entry lives here</span>
+            </span>
+            <span class="note-date">Soon</span>
+          </li>
+        )
+      }
     </ul>
-    <p><a href="/process/">All process entries</a></p>
   </section>
 
-  <section aria-labelledby="about-heading">
-    <h2 id="about-heading">About</h2>
-    <p>
-      Who I am, how I work, and what I'm looking for.
-      <a href="/about/">Read the operating manual</a>.
-    </p>
-  </section>
+  <footer class="home-footer" slot="footer">
+    <p>Melinda Green</p>
+    <p>Built with Civic Ink v1.6</p>
+  </footer>
 </BaseLayout>
 
 <style>
-  /* The one earned display-xl moment: the site's name on its own page.
-     Steps down one token below --bp-sm so it holds one line. */
-  .hero {
-    font-size: var(--text-display-xl);
+  /* This page's styles ship only with this page, so :global(main) here
+     scopes the homepage measure without touching other pages. */
+  :global(main) {
+    max-width: var(--container-narrow);
+    padding-block: var(--space-5) var(--space-7);
   }
 
-  @media (max-width: 480px) {
-    .hero {
-      font-size: var(--text-display-lg);
+  :global(main section + section) {
+    margin-top: var(--space-6);
+  }
+
+  /* Spec asks for a Cobalt focus ring on the paper sections; the Acid
+     global default stays inside the dark toy card, where Cobalt fails
+     the 3:1 non-text contrast floor. */
+  .masthead a:focus-visible,
+  .note-row a:focus-visible {
+    outline-color: var(--color-cobalt);
+  }
+
+  /* ---- Masthead ---- */
+  .masthead {
+    max-width: var(--container-narrow);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: var(--border-mid);
+  }
+
+  .wordmark {
+    font-size: var(--text-body-md);
+    line-height: 24px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
+
+  .masthead nav {
+    display: flex;
+    gap: var(--space-2);
+    font-size: var(--text-body-xs);
+    color: var(--color-charcoal);
+  }
+
+  .masthead nav a {
+    color: inherit;
+  }
+
+  .masthead nav a:hover {
+    color: var(--color-cobalt);
+  }
+
+  /* ---- Epigraph ---- */
+  .epigraph h1 {
+    /* Voice, not chrome (Civic Ink v1.6): header sizes sit on multiples
+       of 8 — 24/32 here, below the display scale. */
+    font-size: var(--text-body-xl);
+    line-height: 32px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-normal);
+    margin: 0;
+  }
+
+  .epigraph p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: var(--text-body-md);
+    line-height: 24px;
+    color: var(--color-charcoal);
+    max-width: 40ch;
+    margin: var(--space-2) 0 0;
+  }
+
+  .epigraph + section {
+    margin-top: var(--space-6);
+  }
+
+  /* ---- Featured toy card ---- */
+  .toy-card {
+    /* Blue Hour "Twilight" surface — values from find-a-film
+       public/tokens.css (dark mode). The toy keeps its own palette;
+       the card is dark in both site modes. */
+    --toy-ground: #0e1228;
+    --toy-text: #e8e4f0;
+    --toy-text-soft: #8b8db0;
+    --toy-link: #7b8fd4;
+
+    position: relative;
+    background: var(--toy-ground);
+    border: var(--border-mid);
+    border-radius: var(--radius-sm);
+    padding: var(--space-4);
+    /* Room for the sticker's overlap above the card edge. */
+    margin-top: var(--space-3);
+  }
+
+  /* The page's single cute-ism. Stays in the accessibility tree: it is
+     the toy's shelf number, not decoration. */
+  .sticker {
+    position: absolute;
+    top: -12px;
+    left: var(--space-4);
+    transform: rotate(-2deg);
+    background: var(--color-acid);
+    color: var(--color-ink);
+    border: var(--border-mid);
+    border-radius: var(--radius-sm);
+    padding: 0 var(--space-2);
+    font-size: var(--text-body-xs);
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .toy-card h2 {
+    /* Syne is the toy's voice, confined to this card (Civic Ink v1.6). */
+    font-family: 'Syne', 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-size: var(--text-body-xl);
+    line-height: 32px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-normal);
+    color: var(--toy-text);
+    margin: var(--space-2) 0 0;
+  }
+
+  .toy-dek {
+    font-size: var(--text-body-sm);
+    line-height: 24px;
+    color: var(--toy-text-soft);
+    max-width: 42ch;
+    margin: var(--space-1) 0 0;
+  }
+
+  .toy-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+
+  .btn-try {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px; /* WCAG touch-target floor, deliberately off-grid */
+    padding: 0 var(--space-3);
+    background: var(--color-acid);
+    color: var(--color-ink);
+    border: var(--border-mid);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .btn-try:hover {
+    /* "Slight darken of Acid" per spec — derived, not a new token. */
+    filter: brightness(0.92);
+  }
+
+  .notes-link {
+    color: var(--toy-link);
+    font-size: var(--text-body-sm);
+    text-decoration: underline;
+  }
+
+  .notes-link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* ---- Notes list ---- */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-body-xs);
+    line-height: 16px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-charcoal);
+    border-bottom: var(--border-mid);
+    padding-bottom: var(--space-2);
+    margin: 0;
+  }
+
+  .note-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .note-row a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: var(--border-rule);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .note-row a:hover {
+    background: color-mix(in srgb, var(--color-warm-rule) 45%, var(--color-paper));
+  }
+
+  .note-row a:hover .note-title {
+    color: var(--color-cobalt);
+  }
+
+  .note-title {
+    font-family: var(--font-display);
+    font-size: var(--text-body-md);
+    line-height: 24px;
+    font-weight: 500;
+    letter-spacing: var(--tracking-normal);
+    margin: 0;
+  }
+
+  .note-dek {
+    display: block;
+    font-size: var(--text-body-xs);
+    line-height: 16px;
+    color: var(--color-charcoal);
+    margin-top: var(--space-1);
+  }
+
+  .note-date {
+    font-size: var(--text-body-xs);
+    color: var(--color-charcoal);
+    white-space: nowrap;
+  }
+
+  /* Non-interactive by design; hidden from the accessibility tree. */
+  .ghost {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: var(--border-rule);
+    color: var(--color-charcoal);
+    opacity: 0.55;
+  }
+
+  .ghost .note-title {
+    color: inherit;
+  }
+
+  /* ---- Footer ---- */
+  .home-footer {
+    max-width: var(--container-narrow);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    border-top: var(--border-mid);
+    padding-block: var(--space-3);
+    font-size: var(--text-body-xs);
+    color: var(--color-charcoal);
+  }
+
+  .home-footer p {
+    margin: 0;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 767px) {
+    :global(main),
+    .masthead,
+    .home-footer {
+      padding-inline: var(--space-3);
+    }
+
+    /* Date drops below the dek, left-aligned, instead of squeezing
+       the title. */
+    .note-row a,
+    .ghost {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-1);
+    }
+  }
+
+  @media (max-width: 399px) {
+    /* Legibility beats charm below 400px. */
+    .sticker {
+      transform: none;
     }
   }
 </style>
