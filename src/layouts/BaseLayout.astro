@@ -20,19 +20,23 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header>
-      <nav aria-label="Site">
-        <a href="/">Field Notes</a>
-        <a href="/process/">Process</a>
-        <a href="/toys/">Toys</a>
-        <a href="/about/">About</a>
-      </nav>
-    </header>
+    <slot name="header">
+      <header>
+        <nav aria-label="Site">
+          <a href="/">Field Notes</a>
+          <a href="/process/">Process</a>
+          <a href="/toys/">Toys</a>
+          <a href="/about/">About</a>
+        </nav>
+      </header>
+    </slot>
     <main id="main">
       <slot />
     </main>
-    <footer>
-      <Colophon />
-    </footer>
+    <slot name="footer">
+      <footer>
+        <Colophon />
+      </footer>
+    </slot>
   </body>
 </html>
