@@ -4,6 +4,10 @@ One-paragraph ADRs for decisions with tradeoffs, newest first. Cheap now, gold i
 
 ---
 
+## 2026-07-16 — Real masthead on every page; the whole site becomes one column
+
+The homepage had a styled one-off masthead (wordmark + about + portfolio) while every other page fell back to an unstyled default nav — Melinda called for a real top nav. Now one shared `Masthead` component renders everywhere: wordmark → home, Process / Toys / About with an `aria-current` section marker (ink, 600, 2px underline), and the portfolio link last behind a hairline divider as the one outbound pointer. Nav type is 14px — same session set the **12px floor** (see civic-ink-changes.md), and primary navigation shouldn't sit at the floor. Supporting change: header, main, and footer all sit on `--container-narrow` globally, so chrome and content share one left edge on every page — the masthead-at-720/main-at-1200 split would have re-created the misalignment bug fixed earlier today. Wide layouts opt out per-page when one actually exists.
+
 ## 2026-07-16 — Entry pages get a spec: one flush-left column on the long-form measure
 
 Melinda flagged that the entry page's title, date, and prose didn't share a left edge. Root cause was a bug — global.css styled bare `header`, which also caught the `<header>` inside `<article>` and indented it; landmarks are now scoped to `body >`. While fixing it, the entry page got its first deliberate spec, since neither Civic Ink nor the homepage handoff covered article layout: article on `--container-narrow` (720px, the doc's "long-form reading" measure), title at the global h1 (Playfair, display-lg), date and app link as one Instrument Sans metadata line (`--text-body-sm`, charcoal) under the title, everything flush left. Entries about a live app carry an `app` frontmatter URL, which renders a "Try the app" link and marks the entry as the homepage card's build-notes target (replacing a hardcoded slug lookup that broke on rename). Candidate for the Civic Ink doc once it survives a second entry.

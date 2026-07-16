@@ -38,13 +38,8 @@ const { title, description, date, app } = Astro.props;
 
 <style>
   /* Entry-page spec (2026-07-16, logged in docs/decisions.md): one
-     flush-left column on the long-form measure; title, metadata, and
-     prose share the same left edge. */
-  article {
-    max-width: var(--container-narrow);
-    margin-inline: auto;
-  }
-
+     flush-left column; title, metadata, and prose share the left edge.
+     The measure comes from the global one-column rule on main. */
   article > header {
     margin-bottom: var(--space-5);
   }

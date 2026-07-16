@@ -3,6 +3,8 @@
 **Implementer:** Claude Code, working inside the field-notes Astro repo.
 **Design decided in claude.ai session, 2026-07-16.** Where this spec says PLACEHOLDER, resolve against the repo's actual Civic Ink v1.5 snapshot and Blue Hour tokens — do not invent new values.
 
+> **Correction (2026-07-16, Melinda):** the two 11px sizes below (sticker badge, NOTES eyebrow) are superseded — the site has a 12px type floor (`--text-body-xs`); both shipped at 12px. See civic-ink-changes.md. The masthead spec below is also superseded by the shared site-wide Masthead component (see decisions.md).
+
 ## Overview
 
 Homepage leads with the work (Toy № 001, find-a-film), not a manifesto. The thesis appears as a two-line epigraph. Structure top to bottom: masthead → epigraph → featured toy card → notes list → colophon footer.

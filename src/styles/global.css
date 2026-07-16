@@ -32,11 +32,14 @@ body {
 
 /* Base rhythm on the 8pt grid — the polish pass refines per page.
    Scoped to body-level landmarks: a bare `header` selector also catches
-   <header> inside <article>, indenting entry titles off the left edge. */
+   <header> inside <article>, indenting entry titles off the left edge.
+   One column site-wide (2026-07-16): chrome and content share the
+   long-form measure and the same left edge; wide layouts opt out
+   per-page when one exists. */
 body > header,
 main,
 body > footer {
-  max-width: var(--container-max);
+  max-width: var(--container-narrow);
   margin-inline: auto;
   padding-inline: var(--grid-margin);
 }
@@ -49,11 +52,13 @@ main section + section {
   margin-top: var(--space-7);
 }
 
-body > header nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  padding-block: var(--space-3);
+/* Below tablet the grid margin narrows with the viewport. */
+@media (max-width: 767px) {
+  body > header,
+  main,
+  body > footer {
+    padding-inline: var(--space-3);
+  }
 }
 
 footer {

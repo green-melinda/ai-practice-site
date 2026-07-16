@@ -23,15 +23,6 @@ const formatDate = (d: Date) =>
   title="Field Notes — Melinda Green"
   description="Working things I've built with AI — and the judgment that shaped them."
 >
-  <header class="masthead" slot="header">
-    <span class="wordmark">Field Notes</span>
-    <nav aria-label="Site">
-      <a href="/about/">about</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://www.mynameisgreenmelinda.com">mynameisgreenmelinda.com</a>
-    </nav>
-  </header>
-
   <div class="epigraph">
     <h1>Judgment as craft.</h1>
     <p>Notes from an AI-assisted design practice.</p>
@@ -97,9 +88,8 @@ const formatDate = (d: Date) =>
 
 <style>
   /* This page's styles ship only with this page, so :global(main) here
-     scopes the homepage measure without touching other pages. */
+     scopes the homepage rhythm without touching other pages. */
   :global(main) {
-    max-width: var(--container-narrow);
     padding-block: var(--space-5) var(--space-7);
   }
 
@@ -110,44 +100,8 @@ const formatDate = (d: Date) =>
   /* Spec asks for a Cobalt focus ring on the paper sections; the Acid
      global default stays inside the dark toy card, where Cobalt fails
      the 3:1 non-text contrast floor. */
-  .masthead a:focus-visible,
   .note-row a:focus-visible {
     outline-color: var(--color-cobalt);
-  }
-
-  /* ---- Masthead ---- */
-  .masthead {
-    max-width: var(--container-narrow);
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-3);
-    padding-block: var(--space-3);
-    border-bottom: var(--border-mid);
-  }
-
-  .wordmark {
-    font-size: var(--text-body-md);
-    line-height: 24px;
-    font-weight: 600;
-    letter-spacing: var(--tracking-wider);
-    text-transform: uppercase;
-  }
-
-  .masthead nav {
-    display: flex;
-    gap: var(--space-2);
-    font-size: var(--text-body-xs);
-    color: var(--color-charcoal);
-  }
-
-  .masthead nav a {
-    color: inherit;
-  }
-
-  .masthead nav a:hover {
-    color: var(--color-cobalt);
   }
 
   /* ---- Epigraph ---- */
@@ -350,7 +304,6 @@ const formatDate = (d: Date) =>
 
   /* ---- Footer ---- */
   .home-footer {
-    max-width: var(--container-narrow);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -367,12 +320,6 @@ const formatDate = (d: Date) =>
 
   /* ---- Responsive ---- */
   @media (max-width: 767px) {
-    :global(main),
-    .masthead,
-    .home-footer {
-      padding-inline: var(--space-3);
-    }
-
     /* Date drops below the dek, left-aligned, instead of squeezing
        the title. */
     .note-row a,

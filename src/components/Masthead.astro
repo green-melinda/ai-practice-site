@@ -1,0 +1,105 @@
+---
+// Site chrome on every page: wordmark home link, the three sections,
+// then the outbound portfolio pointer. Chrome speaks Instrument Sans
+// and never goes below the 12px type floor — nav sits at 14px.
+const sections = [
+  { href: '/process/', label: 'Process' },
+  { href: '/toys/', label: 'Toys' },
+  { href: '/about/', label: 'About' },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="masthead">
+  <a class="wordmark" href="/" aria-current={path === '/' ? 'page' : undefined}>
+    Field Notes
+  </a>
+  <nav aria-label="Site">
+    {
+      sections.map(({ href, label }) => (
+        <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>
+          {label}
+        </a>
+      ))
+    }
+    <a class="portfolio" href="https://www.mynameisgreenmelinda.com">
+      mynameisgreenmelinda.com
+    </a>
+  </nav>
+</header>
+
+<style>
+  /* Stacked nameplate: wordmark row, then the nav row. The nav's full
+     set never fits beside the wordmark on the 720 measure, so the
+     two-row layout is the design, not a wrap artifact. */
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-block: var(--space-3);
+    border-bottom: var(--border-mid);
+  }
+
+  .masthead a {
+    color: var(--color-charcoal);
+    text-decoration: none;
+  }
+
+  .masthead a:hover {
+    color: var(--color-cobalt);
+  }
+
+  /* Cobalt focus on paper surfaces; the Acid global default is for the
+     dark toy card, where Cobalt fails the 3:1 non-text floor. */
+  .masthead a:focus-visible {
+    outline-color: var(--color-cobalt);
+  }
+
+  .wordmark {
+    font-size: var(--text-body-md);
+    line-height: 24px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
+
+  .masthead .wordmark {
+    color: var(--color-ink);
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
+    font-size: var(--text-body-sm);
+    line-height: 24px;
+  }
+
+  /* Current section: ink with a 2px rule — editorial, not loud. */
+  nav a[aria-current='page'] {
+    color: var(--color-ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+
+  /* The one outbound link: far edge, separate register. */
+  .portfolio {
+    margin-left: auto;
+    padding-left: var(--space-3);
+    border-left: var(--border-rule);
+  }
+
+  /* Below tablet the link wraps to its own line — flush left, divider
+     dropped, so it doesn't strand as a right-aligned orphan. */
+  @media (max-width: 767px) {
+    .portfolio {
+      margin-left: 0;
+      padding-left: 0;
+      border-left: none;
+      flex-basis: 100%;
+    }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Colophon from '../components/Colophon.astro';
+import Masthead from '../components/Masthead.astro';
 
 interface Props {
   title: string;
@@ -21,14 +22,7 @@ const { title, description } = Astro.props;
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot name="header">
-      <header>
-        <nav aria-label="Site">
-          <a href="/">Field Notes</a>
-          <a href="/process/">Process</a>
-          <a href="/toys/">Toys</a>
-          <a href="/about/">About</a>
-        </nav>
-      </header>
+      <Masthead />
     </slot>
     <main id="main">
       <slot />
