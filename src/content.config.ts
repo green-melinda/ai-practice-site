@@ -12,6 +12,10 @@ const process = defineCollection({
     date: z.coerce.date(),
     // One-line summary of the most significant AI output this entry rejects.
     rejected: z.string(),
+    // Live URL of the app this entry is about, when there is one. Renders
+    // a "Try the app" link on the entry and marks it as the featured
+    // build-notes target on the homepage toy card.
+    app: z.string().url().optional(),
   }),
 });
 

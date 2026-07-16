@@ -5,7 +5,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const entries = (await getCollection('process')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
-const featured = entries.find((e) => e.id === 'mood-first-streamer-second');
+// The entry with a live app URL is the toy card's build-notes target —
+// no hardcoded slug to chase when the title (and file) get renamed.
+const featured = entries.find((e) => e.data.app);
 
 // The ghost row is decoration for a one-entry list; it must never render
 // alongside a second real entry.

@@ -1,10 +1,10 @@
 ---
-# Title is Melinda's candidate from the 2026-07-16 design session — flagged
-# for confirmation before it's considered final.
-title: "Mood first, streamer second"
+# Working title (Melinda, 2026-07-16) — a final title is still being chosen.
+title: "My first app"
 description: "Building a film recommender when you used to be the recommender"
 date: 2026-07-16
 rejected: "Leading with 'choose your streaming services' — explored, quickly dismissed; it went against the crux of the experience. Mood first, then choose."
+app: "https://find-a-film-tau.vercel.app/"
 ---
 
 I'm a movie person. Was even a film critic for a few years when free daily newspapers were still a thing in big U.S. cities. I also spent 13 years as a concierge and programmer for the Boston Underground Film Festival and have even appeared in a few films. As you might (correctly) assume, my watchlists on my various streaming apps are extensive.
