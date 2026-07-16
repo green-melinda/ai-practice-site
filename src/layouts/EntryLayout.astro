@@ -21,6 +21,9 @@ const { title, description, date } = Astro.props;
               year: 'numeric',
               month: 'long',
               day: 'numeric',
+              // Frontmatter dates parse as UTC midnight; render them in
+              // UTC too or the day shifts back one in western timezones.
+              timeZone: 'UTC',
             })}
           </time>
         )
