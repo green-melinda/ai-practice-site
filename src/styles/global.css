@@ -30,10 +30,12 @@ body {
   padding: var(--space-2) var(--space-3);
 }
 
-/* Base rhythm on the 8pt grid — the polish pass refines per page. */
-header,
+/* Base rhythm on the 8pt grid — the polish pass refines per page.
+   Scoped to body-level landmarks: a bare `header` selector also catches
+   <header> inside <article>, indenting entry titles off the left edge. */
+body > header,
 main,
-footer {
+body > footer {
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--grid-margin);
@@ -47,7 +49,7 @@ main section + section {
   margin-top: var(--space-7);
 }
 
-header nav {
+body > header nav {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);

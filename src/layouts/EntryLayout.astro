@@ -5,9 +5,11 @@ interface Props {
   title: string;
   description?: string;
   date?: Date;
+  /** Live URL of the app this entry is about, when there is one. */
+  app?: string;
 }
 
-const { title, description, date } = Astro.props;
+const { title, description, date, app } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -28,7 +30,47 @@ const { title, description, date } = Astro.props;
           </time>
         )
       }
+      {app && <a class="app-link" href={app}>Try the app</a>}
     </header>
     <slot />
   </article>
 </BaseLayout>
+
+<style>
+  /* Entry-page spec (2026-07-16, logged in docs/decisions.md): one
+     flush-left column on the long-form measure; title, metadata, and
+     prose share the same left edge. */
+  article {
+    max-width: var(--container-narrow);
+    margin-inline: auto;
+  }
+
+  article > header {
+    margin-bottom: var(--space-5);
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  /* Date and app link are chrome, not voice: Instrument Sans metadata
+     on one line under the title. */
+  time,
+  .app-link {
+    font-size: var(--text-body-sm);
+    color: var(--color-charcoal);
+  }
+
+  time {
+    display: inline-block;
+    margin-top: var(--space-2);
+  }
+
+  .app-link {
+    margin-left: var(--space-3);
+  }
+
+  .app-link:hover {
+    color: var(--color-cobalt);
+  }
+</style>
