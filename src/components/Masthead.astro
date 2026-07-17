@@ -22,9 +22,6 @@ const path = Astro.url.pathname;
         </a>
       ))
     }
-    <a class="portfolio" href="https://www.mynameisgreenmelinda.com">
-      mynameisgreenmelinda.com
-    </a>
   </nav>
 </header>
 
@@ -85,21 +82,4 @@ const path = Astro.url.pathname;
     text-underline-offset: 6px;
   }
 
-  /* The one outbound link: far edge, separate register. */
-  .portfolio {
-    margin-left: auto;
-    padding-left: var(--space-3);
-    border-left: var(--border-rule);
-  }
-
-  /* Below tablet the link wraps to its own line — flush left, divider
-     dropped, so it doesn't strand as a right-aligned orphan. */
-  @media (max-width: 767px) {
-    .portfolio {
-      margin-left: 0;
-      padding-left: 0;
-      border-left: none;
-      flex-basis: 100%;
-    }
-  }
 </style>

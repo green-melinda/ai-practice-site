@@ -81,7 +81,7 @@ const formatDate = (d: Date) =>
   </section>
 
   <footer class="home-footer" slot="footer">
-    <p>Melinda Green</p>
+    <p><a href="https://www.mynameisgreenmelinda.com">Melinda Green</a></p>
     <p>Built with Civic Ink v1.6</p>
   </footer>
 </BaseLayout>
@@ -316,6 +316,14 @@ const formatDate = (d: Date) =>
 
   .home-footer p {
     margin: 0;
+  }
+
+  .home-footer a {
+    color: inherit;
+  }
+
+  .home-footer a:hover {
+    color: var(--color-cobalt);
   }
 
   /* ---- Responsive ---- */
