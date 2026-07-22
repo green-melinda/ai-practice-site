@@ -16,7 +16,7 @@ The site itself is evidence: it is built with Claude Code, using Civic Ink, and 
 
 ## Design system rules (Civic Ink)
 
-- Typefaces: Playfair Display (display) + Instrument Sans (body/UI). **Never Arial. Never a system-font fallback stack that lands on Arial.**
+- Typefaces: Playfair Display (display) + Schibsted Grotesk (body/UI). **Never Arial. Never a system-font fallback stack that lands on Arial.**
 - Palette: Ink / Paper / Acid / Cobalt, from the token file. Acid is an accent, spent sparingly — one job per page.
 - 4px border radius, everywhere, no exceptions.
 - 8pt spacing grid.
