@@ -11,9 +11,9 @@ Homepage leads with the work (Toy № 001, find-a-film), not a manifesto. The th
 
 ## Governing type rule (new — Civic Ink v1.6 candidate)
 
-- **Instrument Sans = structure/chrome.** Masthead, nav, section eyebrows, dates, deks, buttons, footer.
+- **Schibsted Grotesk = structure/chrome.** Masthead, nav, section eyebrows, dates, deks, buttons, footer.
 - **Playfair Display = voice.** Appears only where Melinda is saying something: epigraph, entry titles, and (on entry pages) prose emphasis/pull quotes.
-- **Syne = the toy's voice**, confined to inside the toy card. Toy chrome stays Instrument Sans.
+- **Syne = the toy's voice**, confined to inside the toy card. Toy chrome stays Schibsted Grotesk.
 - **Headers on multiples of 8** (16 / 24 / 32 scale). Body and small labels align to the 8pt grid via line-height, not font size.
 
 ## Layout
@@ -25,7 +25,7 @@ Homepage leads with the work (Toy № 001, find-a-film), not a manifesto. The th
 ## Sections
 
 ### 1. Masthead
-- Left: `FIELD NOTES` — Instrument Sans, 16px / 24px line-height, weight 600, letter-spacing 0.12em, uppercase, Ink.
+- Left: `FIELD NOTES` — Schibsted Grotesk, 16px / 24px line-height, weight 600, letter-spacing 0.12em, uppercase, Ink.
 - Right: nav — `about · greenmelinda.com` — 12px, secondary text color.
 - Bottom border: 1px solid Ink.
 - Padding: 20px 28px (snap to tokens).
@@ -40,7 +40,7 @@ Homepage leads with the work (Toy № 001, find-a-film), not a manifesto. The th
 - Container: 1px solid Ink border, 4px radius, background = Blue Hour dark ground (mock PLACEHOLDER `#1B2440` — use the real Blue Hour token from the find-a-film repo).
 - Sticker badge, overlapping top-left edge (absolute, top -11px, left 20px): `TOY № 001` — Acid background (PLACEHOLDER `#D9F24B`; use real Acid token), dark text from same family, 11px, weight 600, 1px Ink border, 4px radius, `transform: rotate(-2deg)`, letter-spacing 0.06em. This is the page's single cute-ilism moment — do not add more.
 - Title: `I don't know what to watch` — Syne, 24px / 32px, weight 600, Blue Hour light text (PLACEHOLDER `#F2EFE6`).
-- Dek: `Tell it how you feel. It tells you what to watch.` — Instrument Sans, ~13.5px, Blue Hour muted (PLACEHOLDER `#B9C1D9`), max-width 42ch. Exactly this copy; the "mood first" phrasing is reserved for the entry title below.
+- Dek: `Tell it how you feel. It tells you what to watch.` — Schibsted Grotesk, ~13.5px, Blue Hour muted (PLACEHOLDER `#B9C1D9`), max-width 42ch. Exactly this copy; the "mood first" phrasing is reserved for the entry title below.
 - Actions row: primary button `Try it` (Acid bg, dark text, 4px radius, links to the deployed app) + text link `read the build notes` (underlined, links to the entry).
 - Card padding 24px; 16px gap above actions.
 
@@ -49,7 +49,7 @@ Homepage leads with the work (Toy № 001, find-a-film), not a manifesto. The th
 - Heavy rule below eyebrow: 1px solid Ink.
 - Each row: flex, space-between, baseline-aligned, 16px vertical padding, bottom border 1px light hairline (PLACEHOLDER `#d8d4c8` — nearest Civic Ink hairline token).
   - Title: Playfair, 16px / 24px, weight 500, Ink. Entire row is the link target.
-  - Dek: Instrument Sans 12.5px, secondary, one line.
+  - Dek: Schibsted Grotesk 12.5px, secondary, one line.
   - Right: date, 11.5px, secondary, nowrap.
 - Row 1 (live): title `Mood first, streamer second` (confirm with Melinda before hardcoding — candidate title, not final), dek `Building a film recommender when you used to be the recommender`, date `Jul 2026`, links to the find-a-film entry.
 - Row 2 (ghost): `Next entry lives here` / `Soon` — muted color (~`#8a877e`), non-interactive. Render from the entries collection: ghost row appears only via an explicit flag or when count == 1; must never render if a second real entry exists.

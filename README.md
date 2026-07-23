@@ -51,4 +51,4 @@ Entries are markdown with schema-enforced frontmatter (`src/content/config.ts`).
 
 ## Colophon
 
-Designed and edited by Melinda Green, who you should hire as your next product designer. Built in collaboration with Claude Code — the division of labor is documented in the entries themselves. Type is Playfair Display and Instrument Sans. Launched July 2026. 
+Designed and edited by Melinda Green, who you should hire as your next product designer. Built in collaboration with Claude Code — the division of labor is documented in the entries themselves. Type is Playfair Display and Schibsted Grotesk. Launched July 2026. 

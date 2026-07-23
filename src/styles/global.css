@@ -6,7 +6,7 @@
 /* Playfair 500/600 + italic carry the voice roles (epigraph, entry-row
    titles) per Civic Ink v1.6; Syne 600 appears only inside the find-a-film
    toy card — the toy's voice stays on its own surfaces. */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,400&family=Syne:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,400&family=Syne:wght@600&display=swap');
 @import './tokens.css';
 
 body {
