@@ -39,11 +39,52 @@ Three collections:
 
 ## Voice and words
 
-- Words are design. Copy gets the same review rigor as layout.
+Words are design. Copy gets the same review rigor as layout.
+
+**Every line has a speaker. Name them, or cut the line.** This site is Melinda
+talking to one skeptical design leader who has read "AI-fluent" on a hundred
+résumés. Chrome that speaks in nobody's voice is the failure this section exists
+to prevent — and the failure the previous version of it permitted.
+
+1. **Headings are questions or thoughts, never labels.** A heading is the real
+   question the work answered, or the thought that started it, in the voice of
+   whoever had it: "Is this research fraudulent?" (portfolio), "I don't know what
+   to watch" (find-a-film). Same move, arrived at twice. If a heading names a
+   category instead of saying something, it's wrong. "Judgment as craft." is the
+   anti-example.
+2. **Name it, don't summarize it.** "13 years programming the Boston Underground
+   Film Festival," not "extensive film background." Specifics are the
+   credibility; abstractions spend it.
+3. **The aside is a signature.** Parentheticals that anticipate the reader's next
+   thought belong here — "(and here is my GitHub since you probably want to know
+   about my AI workflows.)" Assume the reader is already halfway there.
+4. **Admit the real thing.** "Using AI-generated copy so prominently made me feel
+   a little dirty." The confession is the brand; it's what the kept/rejected
+   sections exist for. Never sand it down.
+5. **No capability triads.** Three parallel phrases in a row is the tell —
+   "I simplify complex workflows, modernize legacy systems, and make usability
+   synonymous with accessibility." Say one thing concretely instead of three
+   things abstractly.
+6. **The site never editorializes about itself.** No "practice," "craft," or
+   "judgment" floating free as a slogan. The work makes that case; the chrome
+   doesn't get to claim it.
+
+**Test:** would you say this out loud to a colleague, in a bar, without wincing?
+If it reads as a LinkedIn post, rewrite it.
+
+Still true, and still enforced:
+
 - Register: plain, specific, first person, journalist's economy. Confident without hedging, honest without false modesty.
 - Sentence case everywhere. Active voice. A link says where it goes.
 - No AI-hype vocabulary: never "leverage," "supercharge," "10x," "the future of design." Never "I'm passionate about."
-- Entry titles are declarative statements, not listicles or questions.
+- Not clickbait: a title may be a question only when it is the question the work
+  actually answered. "Is this research fraudulent?" earns it; "Is design dead?"
+  does not. Never listicles.
+
+> Retired 2026-08-05: *"Entry titles are declarative statements, not listicles or
+> questions."* Written against clickbait, it banned the move that produces the
+> best headlines on both other properties — and left "Judgment as craft." fully
+> compliant. Rule 1 replaces it; the anti-clickbait intent survives above.
 
 ## Workflow rules for Claude Code
 
