@@ -1,4 +1,15 @@
 ---
+// Self-hosted faces, only the weights the site actually renders: Schibsted
+// 400/600 (body, chrome), Playfair 700 (h1/h2), Syne 600 (toy card). The
+// Google Fonts @import this replaces fetched nine faces, including an
+// italic Playfair nothing referenced.
+// Latin subset only: the full imports also emit cyrillic, greek, vietnamese,
+// and latin-ext faces. Browsers never downloaded them (unicode-range gates
+// that), but they shipped in the build output for no reason.
+import '@fontsource/schibsted-grotesk/latin-400.css';
+import '@fontsource/schibsted-grotesk/latin-600.css';
+import '@fontsource/playfair-display/latin-700.css';
+import '@fontsource/syne/latin-600.css';
 import '../styles/global.css';
 import Colophon from '../components/Colophon.astro';
 import Masthead from '../components/Masthead.astro';
