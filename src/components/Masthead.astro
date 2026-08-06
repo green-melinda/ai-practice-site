@@ -1,12 +1,12 @@
 ---
-// Site chrome on every page: wordmark home link, the three sections,
-// then the outbound portfolio pointer. Chrome speaks Schibsted Grotesk
-// and never goes below the 12px type floor — nav sits at 14px.
-const sections = [
-  { href: '/process/', label: 'Process' },
-  { href: '/toys/', label: 'Toys' },
-  { href: '/about/', label: 'About' },
-];
+// Site chrome on every page: wordmark home link, then the sections that
+// actually hold something. Chrome speaks Schibsted Grotesk and never goes
+// below the 12px type floor — nav sits at 14px.
+//
+// Process and Toys retired 2026-08-05: with one artifact there is nothing
+// for a section route to disambiguate, and a nav item pointing at an empty
+// shelf is the same promise-of-future-content the ghost row was.
+const sections = [{ href: '/about/', label: 'About' }];
 const path = Astro.url.pathname;
 ---
 

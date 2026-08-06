@@ -1,84 +1,80 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const entries = (await getCollection('process')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
-// The entry with a live app URL is the toy card's build-notes target —
-// no hardcoded slug to chase when the title (and file) get renamed.
-const featured = entries.find((e) => e.data.app);
-
-// The ghost row is decoration for a one-entry list; it must never render
-// alongside a second real entry.
-const showGhost = entries.length === 1;
-
-// timeZone UTC because frontmatter dates parse as UTC midnight — local
-// rendering shifts them back a day (and near month edges, a month).
-const formatDate = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+// One app, one story, one colophon, one page (2026-08-05). Routes exist to
+// disambiguate multiple items; with a single artifact there is nothing to
+// disambiguate, so /process/ and /toys/ retired. The collection stays, so a
+// second artifact grows this page into a shelf without a rewrite.
+const entries = await getCollection('process');
+const entry = entries.find((e) => e.data.app) ?? entries[0];
+const { Content } = await render(entry);
+const { title, rejected, limitation, stack, buildTime, app } = entry.data;
 ---
 
 <BaseLayout
   title="Field Notes — Melinda Green"
   description="Working things I've built with AI — and the judgment that shaped them."
 >
-  <div class="epigraph">
-    <h1>Judgment as craft.</h1>
-    <p>Notes from an AI-assisted design practice.</p>
-  </div>
-
-  <section aria-labelledby="toy-title">
-    <article class="toy-card">
-      <span class="sticker">Toy № 001</span>
-      <h2 id="toy-title">I don't know what to watch</h2>
+  <article>
+    {/* The artifact leads: touch something working before reading about it. */}
+    <div class="toy-card">
+      <h1>{title}</h1>
       <p class="toy-dek">Tell it how you feel. It tells you what to watch.</p>
-      <div class="toy-actions">
-        <a class="btn-try" href="https://find-a-film-tau.vercel.app/">Try it</a>
+      <a class="btn-try" href={app}>Try it</a>
+    </div>
+
+    <section class="story" aria-labelledby="story-heading">
+      <h2 id="story-heading">I'm a movie person.</h2>
+      <Content />
+    </section>
+
+    <section class="confession" aria-labelledby="confession-heading">
+      <h2 id="confession-heading">It made me feel a little dirty.</h2>
+      <dl>
+        <div class="row">
+          <dt>What I rejected</dt>
+          <dd>{rejected}</dd>
+        </div>
         {
-          featured && (
-            <a class="notes-link" href={`/process/${featured.id}/`}>
-              read the build notes
-            </a>
+          limitation && (
+            <div class="row">
+              <dt>What it can't do yet</dt>
+              <dd>
+                <ul>
+                  {limitation.map((l) => (
+                    <li>{l}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
           )
         }
-      </div>
-    </article>
-  </section>
-
-  <section aria-labelledby="notes-heading">
-    <h2 class="eyebrow" id="notes-heading">Notes</h2>
-    <ul class="note-list">
-      {
-        entries.map((entry) => (
-          <li class="note-row">
-            <a href={`/process/${entry.id}/`}>
-              <span class="note-text">
-                <h3 class="note-title">{entry.data.title}</h3>
-                <span class="note-dek">{entry.data.description}</span>
-              </span>
-              <time
-                class="note-date"
-                datetime={entry.data.date.toISOString().slice(0, 10)}
-              >
-                {formatDate(entry.data.date)}
-              </time>
-            </a>
-          </li>
-        ))
-      }
-      {
-        showGhost && (
-          <li class="note-row ghost" aria-hidden="true">
-            <span class="note-text">
-              <span class="note-title">Next entry lives here</span>
-            </span>
-            <span class="note-date">Soon</span>
-          </li>
-        )
-      }
-    </ul>
-  </section>
+        {
+          stack && (
+            <div class="row">
+              <dt>Stack</dt>
+              <dd>
+                <ul>
+                  {stack.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          )
+        }
+        {
+          buildTime && (
+            <div class="row">
+              <dt>Build time</dt>
+              <dd>{buildTime}</dd>
+            </div>
+          )
+        }
+      </dl>
+    </section>
+  </article>
 
   <footer class="home-footer" slot="footer">
     <p><a href="https://www.mynameisgreenmelinda.com">Melinda Green</a></p>
@@ -87,50 +83,12 @@ const formatDate = (d: Date) =>
 </BaseLayout>
 
 <style>
-  /* This page's styles ship only with this page, so :global(main) here
-     scopes the homepage rhythm without touching other pages. */
+  /* This page's styles ship only with this page. */
   :global(main) {
     padding-block: var(--space-5) var(--space-7);
   }
 
-  :global(main section + section) {
-    margin-top: var(--space-6);
-  }
-
-  /* Spec asks for a Cobalt focus ring on the paper sections; the Acid
-     global default stays inside the dark toy card, where Cobalt fails
-     the 3:1 non-text contrast floor. */
-  .note-row a:focus-visible {
-    outline-color: var(--color-cobalt);
-  }
-
-  /* ---- Epigraph ---- */
-  .epigraph h1 {
-    /* Voice, not chrome (Civic Ink v1.6): header sizes sit on multiples
-       of 8 — 24/32 here, below the display scale. */
-    font-size: var(--text-body-xl);
-    line-height: 32px;
-    font-weight: 600;
-    letter-spacing: var(--tracking-normal);
-    margin: 0;
-  }
-
-  .epigraph p {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: var(--text-body-md);
-    line-height: 24px;
-    color: var(--color-charcoal);
-    max-width: 40ch;
-    margin: var(--space-2) 0 0;
-  }
-
-  .epigraph + section {
-    margin-top: var(--space-6);
-  }
-
-  /* ---- Featured toy card ---- */
+  /* ---- The artifact ---- */
   .toy-card {
     /* Blue Hour "Twilight" surface — values from find-a-film
        public/tokens.css (dark mode). The toy keeps its own palette;
@@ -138,38 +96,16 @@ const formatDate = (d: Date) =>
     --toy-ground: #0e1228;
     --toy-text: #e8e4f0;
     --toy-text-soft: #8b8db0;
-    --toy-link: #7b8fd4;
 
-    position: relative;
     background: var(--toy-ground);
     border: var(--border-mid);
     border-radius: var(--radius-sm);
     padding: var(--space-4);
-    /* Room for the sticker's overlap above the card edge. */
-    margin-top: var(--space-3);
   }
 
-  /* The page's single cute-ism. Stays in the accessibility tree: it is
-     the toy's shelf number, not decoration. */
-  .sticker {
-    position: absolute;
-    top: -12px;
-    left: var(--space-4);
-    transform: rotate(-2deg);
-    background: var(--color-acid);
-    color: var(--color-ink);
-    border: var(--border-mid);
-    border-radius: var(--radius-sm);
-    padding: 0 var(--space-2);
-    font-size: var(--text-body-xs);
-    line-height: 20px;
-    font-weight: 600;
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-  }
-
-  .toy-card h2 {
-    /* Syne is the toy's voice, confined to this card (Civic Ink v1.6). */
+  /* The card title is now the page h1 — Syne is the toy's voice, confined
+     to this card (Civic Ink v1.6), so it overrides the global display face. */
+  .toy-card h1 {
     font-family: 'Syne', 'Helvetica Neue', 'Helvetica', sans-serif;
     font-size: var(--text-body-xl);
     line-height: 32px;
@@ -187,18 +123,11 @@ const formatDate = (d: Date) =>
     margin: var(--space-1) 0 0;
   }
 
-  .toy-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-3);
-  }
-
   .btn-try {
     display: inline-flex;
     align-items: center;
     min-height: 44px; /* WCAG touch-target floor, deliberately off-grid */
+    margin-top: var(--space-3);
     padding: 0 var(--space-3);
     background: var(--color-acid);
     color: var(--color-ink);
@@ -214,92 +143,80 @@ const formatDate = (d: Date) =>
     filter: brightness(0.92);
   }
 
-  .notes-link {
-    color: var(--toy-link);
-    font-size: var(--text-body-sm);
-    text-decoration: underline;
+  /* ---- The story ---- */
+  .story {
+    margin-top: var(--space-6);
   }
 
-  .notes-link:hover {
-    text-decoration-thickness: 2px;
+  .story h2 {
+    margin: 0 0 var(--space-4);
   }
 
-  /* ---- Notes list ---- */
-  .eyebrow {
-    font-family: var(--font-body);
+  /* <Content /> renders markdown, so its paragraphs need :global to be
+     reachable from this component's scoped styles. */
+  .story :global(p) {
+    margin: 0 0 var(--space-4);
+  }
+
+  .story :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* ---- The confession ---- */
+  /* The site's spine gets a rule above it and nothing else: hairlines and
+     type, per the editorial-brutalism note in CLAUDE.md. */
+  .confession {
+    margin-top: var(--space-6);
+    border-top: var(--border-mid);
+    padding-top: var(--space-4);
+  }
+
+  .confession h2 {
+    margin: 0 0 var(--space-4);
+  }
+
+  .confession dl {
+    margin: 0;
+  }
+
+  .confession .row {
+    display: grid;
+    /* Wide enough that "What it can't do yet" holds one line — the label is
+       honest copy and doesn't get shortened to suit the column. */
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: var(--border-rule);
+  }
+
+  .confession .row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .confession dt {
     font-size: var(--text-body-xs);
-    line-height: 16px;
+    line-height: 24px;
     font-weight: 600;
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--color-charcoal);
-    border-bottom: var(--border-mid);
-    padding-bottom: var(--space-2);
-    margin: 0;
   }
 
-  .note-list {
-    list-style: none;
+  .confession dd {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    line-height: 24px;
+  }
+
+  .confession dd ul {
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 
-  .note-row a {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-3);
-    padding-block: var(--space-3);
-    border-bottom: var(--border-rule);
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .note-row a:hover {
-    background: color-mix(in srgb, var(--color-warm-rule) 45%, var(--color-paper));
-  }
-
-  .note-row a:hover .note-title {
-    color: var(--color-cobalt);
-  }
-
-  .note-title {
-    font-family: var(--font-display);
-    font-size: var(--text-body-md);
-    line-height: 24px;
-    font-weight: 500;
-    letter-spacing: var(--tracking-normal);
-    margin: 0;
-  }
-
-  .note-dek {
-    display: block;
-    font-size: var(--text-body-xs);
-    line-height: 16px;
-    color: var(--color-charcoal);
-    margin-top: var(--space-1);
-  }
-
-  .note-date {
-    font-size: var(--text-body-xs);
-    color: var(--color-charcoal);
-    white-space: nowrap;
-  }
-
-  /* Non-interactive by design; hidden from the accessibility tree. */
-  .ghost {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-3);
-    padding-block: var(--space-3);
-    border-bottom: var(--border-rule);
-    color: var(--color-charcoal);
-    opacity: 0.55;
-  }
-
-  .ghost .note-title {
-    color: inherit;
+  .confession dd li + li {
+    margin-top: var(--space-2);
   }
 
   /* ---- Footer ---- */
@@ -328,20 +245,10 @@ const formatDate = (d: Date) =>
 
   /* ---- Responsive ---- */
   @media (max-width: 767px) {
-    /* Date drops below the dek, left-aligned, instead of squeezing
-       the title. */
-    .note-row a,
-    .ghost {
-      flex-direction: column;
-      align-items: flex-start;
+    /* The label column can't hold its width and the measure at once. */
+    .confession .row {
+      grid-template-columns: 1fr;
       gap: var(--space-1);
-    }
-  }
-
-  @media (max-width: 399px) {
-    /* Legibility beats charm below 400px. */
-    .sticker {
-      transform: none;
     }
   }
 </style>
