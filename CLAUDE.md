@@ -86,6 +86,35 @@ Still true, and still enforced:
 > best headlines on both other properties — and left "Judgment as craft." fully
 > compliant. Rule 1 replaces it; the anti-clickbait intent survives above.
 
+### The unslop skill and this section
+
+The `unslop` skill loads from Melinda's Claude account in every session and applies here too. It
+used to sit in this repo as `UNSLOP-SKILL.md`, which was never a path Claude Code loads from, so
+it did nothing. The editable source is now
+[working-with-me](https://github.com/green-melinda/working-with-me).
+
+Two places it meets this section, and this section wins:
+
+- **Asides stay.** Unslop bans parentheses used as a substitute for em dashes. It does not ban the
+  parenthetical aside in rule 3, which is a voice move this site is built on.
+- **Em dashes.** The ban covers writing Claude generates. Melinda's own em dashes, here and in the
+  site copy, stay as written.
+
+Everywhere else the two agree, and unslop has the longer list.
+
+## How Melinda works
+
+Full context: https://github.com/green-melinda/working-with-me
+
+- Research comparable products and flows before designing anything.
+- Content and structure first. Do not jump to visual layout.
+- Information architecture is the method. Map the flow before the screen.
+- One task at a time. Give me the next right thing, not a ten step plan.
+- Be direct and have a point of view. Give a recommendation, not five options.
+- Do not praise work to be nice. Say what is good and what needs work.
+- No dark patterns, no engagement mechanics, no jargon. Not negotiable.
+- All writing goes through the `unslop` skill. No em dashes in anything you generate.
+
 ## Workflow rules for Claude Code
 
 - Propose before you build. For any new page or component: a short plan (structure, tokens used, copy skeleton) gets a yes before code is written.
