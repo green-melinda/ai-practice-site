@@ -4,7 +4,7 @@ A designer's field notes on working with AI — showing the judgment, not just t
 
 This is a standalone microsite documenting how I apply AI in my design practice: where I let it run, where I overrule it, and why. It's an archive with an opinion, not a blog. The site is also its own evidence — built with [Claude Code](https://claude.com/claude-code), styled with my design system, with the collaboration logged as it happened.
 
-**Live site:** <https://field-notes-beryl.vercel.app>
+**Live site in progress:** <https://field-notes-beryl.vercel.app>
 
 ## What's here
 
